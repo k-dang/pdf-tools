@@ -1,12 +1,31 @@
 {
-  "name": "pdf-splitter",
-  "module": "index.ts",
+  "name": "@k-dang/pdf-tools",
+  "version": "0.1.0",
   "type": "module",
-  "private": true,
-  "devDependencies": {
-    "@types/bun": "latest"
+  "private": false,
+  "bin": "./dist/cli.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": "Kevin Dang",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-dang/pdf-tools.git"
   },
-  "peerDependencies": {
+  "homepage": "https://github.com/k-dang/pdf-tools#readme",
+  "engines": {
+    "bun": ">=1.3.2"
+  },
+  "keywords": [
+    "pdf",
+    "split",
+    "merge",
+    "cli",
+    "bun"
+  ],
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "3.7.4",
     "typescript": "^5"
   },
   "dependencies": {
@@ -14,6 +33,9 @@
     "pdf-lib": "^1.17.1"
   },
   "scripts": {
-    "merge": "bun run merge.ts"
+    "dev": "bun run cli.ts",
+    "build": "bun run scripts/build.ts",
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
   }
 }
