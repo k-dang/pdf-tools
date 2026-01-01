@@ -5,15 +5,15 @@ const cli = meow({
   description: "A CLI tool for splitting and merging PDFs",
   help: `
 Usage
-  $ @k-dang/pdf-tools <command> [options]
+  $ pdf-tools <command> [options]
 
 Commands
   split    Extract pages from a PDF
   merge    Merge multiple PDFs
 
 Examples
-  $ @k-dang/pdf-tools split document.pdf --pages 6-8
-  $ @k-dang/pdf-tools merge file1.pdf file2.pdf --output combined.pdf
+  $ pdf-tools split document.pdf --pages 6-8
+  $ pdf-tools merge file1.pdf file2.pdf --output combined.pdf
 `,
   importMeta: import.meta,
 });

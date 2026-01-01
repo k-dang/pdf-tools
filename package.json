@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "type": "module",
   "private": false,
-  "bin": "./dist/cli.js",
+  "bin": {
+    "pdf-tools": "./dist/cli.js"
+  },
   "files": [
     "dist/**/*"
   ],

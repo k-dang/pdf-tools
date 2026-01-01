@@ -23,7 +23,7 @@ bun install -g @k-dang/pdf-tools
 ### Extract Pages
 
 ```bash
-@k-dang/pdf-tools split <input-file> --pages <pages> [--output <output-file>]
+pdf-tools split <input-file> --pages <pages> [--output <output-file>]
 ```
 
 #### Options
@@ -36,25 +36,25 @@ bun install -g @k-dang/pdf-tools
 Extract pages 6-8 from a PDF:
 
 ```bash
-@k-dang/pdf-tools split document.pdf --pages 6-8
+pdf-tools split document.pdf --pages 6-8
 ```
 
 Extract specific pages and ranges:
 
 ```bash
-@k-dang/pdf-tools split document.pdf --pages "1,3,5-8" --output extracted.pdf
+pdf-tools split document.pdf --pages "1,3,5-8" --output extracted.pdf
 ```
 
 Extract a single page:
 
 ```bash
-@k-dang/pdf-tools split document.pdf --pages 10 --output page10.pdf
+pdf-tools split document.pdf --pages 10 --output page10.pdf
 ```
 
 ### Merge PDFs
 
 ```bash
-@k-dang/pdf-tools merge <file1.pdf> <file2.pdf> [file3.pdf ...] [--output <output-file>]
+pdf-tools merge <file1.pdf> <file2.pdf> [file3.pdf ...] [--output <output-file>]
 ```
 
 #### Merge Options
@@ -66,13 +66,13 @@ Extract a single page:
 Merge two PDFs:
 
 ```bash
-@k-dang/pdf-tools merge document1.pdf document2.pdf
+pdf-tools merge document1.pdf document2.pdf
 ```
 
 Merge multiple PDFs with custom output:
 
 ```bash
-@k-dang/pdf-tools merge file1.pdf file2.pdf file3.pdf --output combined.pdf
+pdf-tools merge file1.pdf file2.pdf file3.pdf --output combined.pdf
 ```
 
 ## Page Range Format
