@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'src/**'
-  
+      - "apps/cli/**"
+      - "packages/utils/**"
+
   workflow_dispatch:
 
 jobs:
@@ -27,8 +28,7 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Publish package
-        run: bun publish -p --access public
+      - name: Publish CLI package
+        run: cd apps/cli && bun publish -p --access public
         env:
           NPM_CONFIG_TOKEN: ${{ secrets.NPM_TOKEN }}
-

@@ -4,18 +4,36 @@
   "workspaces": {
     "": {
       "name": "pdf-splitter",
-      "dependencies": {
-        "meow": "^14.0.0",
-        "pdf-lib": "^1.17.1",
-      },
       "devDependencies": {
         "@types/bun": "latest",
         "prettier": "3.7.4",
         "typescript": "^5",
       },
     },
+    "apps/cli": {
+      "name": "@k-dang/pdf-tools",
+      "version": "0.1.0",
+      "bin": {
+        "pdf-tools": "./dist/cli.js",
+      },
+      "dependencies": {
+        "@k-dang/utils": "workspace:*",
+        "meow": "^14.0.0",
+      },
+    },
+    "packages/utils": {
+      "name": "@k-dang/utils",
+      "version": "0.1.0",
+      "dependencies": {
+        "pdf-lib": "^1.17.1",
+      },
+    },
   },
   "packages": {
+    "@k-dang/pdf-tools": ["@k-dang/pdf-tools@workspace:apps/cli"],
+
+    "@k-dang/utils": ["@k-dang/utils@workspace:packages/utils"],
+
     "@pdf-lib/standard-fonts": ["@pdf-lib/standard-fonts@1.0.0", "", { "dependencies": { "pako": "^1.0.6" } }, "sha512-hU30BK9IUN/su0Mn9VdlVKsWBS6GyhVfqjwl1FjZN4TxP6cCw0jP2w7V3Hf5uX7M0AZJ16vey9yE0ny7Sa59ZA=="],
 
     "@pdf-lib/upng": ["@pdf-lib/upng@1.0.1", "", { "dependencies": { "pako": "^1.0.10" } }, "sha512-dQK2FUMQtowVP00mtIksrlZhdFXQZPC+taih1q4CvPZ5vqdxR/LKBaFg0oAfzd1GlHZXXSPdQfzQnt+ViGvEIQ=="],

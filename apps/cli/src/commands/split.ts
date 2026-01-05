@@ -1,7 +1,6 @@
+import { parsePageRange, splitPDF } from "@k-dang/utils";
 import meow from "meow";
-import { basename, extname, join, dirname } from "path";
-import { parsePageRange } from "../lib/parser.js";
-import { splitPDF } from "../lib/pdf.js";
+import { basename, dirname, extname, join } from "path";
 
 export const splitCommand = {
   run: async (args: string[]) => {
@@ -31,7 +30,7 @@ export const splitCommand = {
             shortFlag: "o",
           },
         },
-      }
+      },
     );
 
     const inputFile = cli.input[0];
@@ -61,7 +60,7 @@ export const splitCommand = {
     } catch (error) {
       console.error(
         "Error:",
-        error instanceof Error ? error.message : String(error)
+        error instanceof Error ? error.message : String(error),
       );
       process.exit(1);
     }

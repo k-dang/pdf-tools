@@ -1,5 +1,5 @@
+import { mergePDFs } from "@k-dang/utils";
 import meow from "meow";
-import { mergePDFs } from "../lib/pdf.js";
 
 export const mergeCommand = {
   run: async (args: string[]) => {
@@ -25,7 +25,7 @@ export const mergeCommand = {
             default: "merged.pdf",
           },
         },
-      }
+      },
     );
 
     const inputFiles = cli.input;
@@ -42,7 +42,7 @@ export const mergeCommand = {
     } catch (error) {
       console.error(
         "Error:",
-        error instanceof Error ? error.message : String(error)
+        error instanceof Error ? error.message : String(error),
       );
       process.exit(1);
     }

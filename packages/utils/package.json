@@ -1,0 +1,11 @@
+{
+  "name": "@k-dang/utils",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "pdf-lib": "^1.17.1"
+  },
+  "devDependencies": {}
+}

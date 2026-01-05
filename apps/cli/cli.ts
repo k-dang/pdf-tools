@@ -38,4 +38,4 @@ for (const [key, value] of Object.entries(cli.flags)) {
   }
 }
 
-handler.run(subCommandArgs);
+await handler.run(subCommandArgs);
