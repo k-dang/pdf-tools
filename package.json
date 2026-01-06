@@ -11,8 +11,8 @@
     "typescript": "^5"
   },
   "scripts": {
-    "dev": "bun run --filter=@k-dang/pdf-tools dev",
-    "build": "bun run --filter=@k-dang/pdf-tools build",
+    "dev:cli": "bun run --filter=@k-dang/pdf-tools dev",
+    "build:cli": "bun run --filter=@k-dang/pdf-tools build",
     "check": "tsc --noEmit",
     "format": "prettier --write ."
   }
