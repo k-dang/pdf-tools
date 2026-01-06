@@ -1,6 +1,6 @@
 {
   "name": "@k-dang/pdf-tools",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "private": false,
   "bin": {
@@ -25,10 +25,11 @@
     "cli",
     "bun"
   ],
-  "devDependencies": {},
-  "dependencies": {
-    "meow": "^14.0.0",
+  "devDependencies": {
     "@k-dang/utils": "workspace:*"
+  },
+  "dependencies": {
+    "meow": "^14.0.0"
   },
   "scripts": {
     "dev": "bun run cli.ts",

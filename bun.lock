@@ -12,13 +12,15 @@
     },
     "apps/cli": {
       "name": "@k-dang/pdf-tools",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "bin": {
         "pdf-tools": "./dist/cli.js",
       },
       "dependencies": {
-        "@k-dang/utils": "workspace:*",
         "meow": "^14.0.0",
+      },
+      "devDependencies": {
+        "@k-dang/utils": "workspace:*",
       },
     },
     "packages/utils": {
