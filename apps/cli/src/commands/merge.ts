@@ -1,4 +1,4 @@
-import { mergePDFs } from "@k-dang/utils";
+import { mergePDFs } from "@pdf-tools/utils";
 import meow from "meow";
 import { dirname, isAbsolute, join } from "path";
 

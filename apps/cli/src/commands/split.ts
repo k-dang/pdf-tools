@@ -1,4 +1,4 @@
-import { parsePageRange, splitPDF } from "@k-dang/utils";
+import { parsePageRange, splitPDF } from "@pdf-tools/utils";
 import meow from "meow";
 import { basename, dirname, extname, isAbsolute, join } from "path";
 
