@@ -1,5 +1,6 @@
 import { mergePDFs } from "@k-dang/utils";
 import meow from "meow";
+import { dirname, isAbsolute, join } from "path";
 
 export const mergeCommand = {
   run: async (args: string[]) => {
@@ -37,7 +38,13 @@ export const mergeCommand = {
     }
 
     try {
-      const outputPath = cli.flags.output || "merged.pdf";
+      let outputPath = (cli.flags.output as string) || "merged.pdf";
+
+      const firstInputDir = dirname(inputFiles[0]!);
+      if (!isAbsolute(outputPath)) {
+        outputPath = join(firstInputDir, outputPath);
+      }
+
       await mergePDFs(inputFiles, outputPath);
     } catch (error) {
       console.error(

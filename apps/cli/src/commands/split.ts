@@ -1,6 +1,6 @@
 import { parsePageRange, splitPDF } from "@k-dang/utils";
 import meow from "meow";
-import { basename, dirname, extname, join } from "path";
+import { basename, dirname, extname, isAbsolute, join } from "path";
 
 export const splitCommand = {
   run: async (args: string[]) => {
@@ -49,11 +49,12 @@ export const splitCommand = {
     try {
       const pages = parsePageRange(cli.flags.pages);
 
-      let outputPath = cli.flags.output;
-      if (!outputPath) {
-        const inputDir = dirname(inputFile);
-        const inputBase = basename(inputFile, extname(inputFile));
-        outputPath = join(inputDir, `${inputBase}_split.pdf`);
+      const inputDir = dirname(inputFile);
+      const inputBase = basename(inputFile, extname(inputFile));
+
+      let outputPath = cli.flags.output || `${inputBase}_split.pdf`;
+      if (!isAbsolute(outputPath)) {
+        outputPath = join(inputDir, outputPath);
       }
 
       await splitPDF(inputFile, outputPath, pages);
