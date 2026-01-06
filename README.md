@@ -4,10 +4,10 @@ A monorepo containing tools for PDF manipulation, powered by Bun.
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| [@k-dang/pdf-tools](./apps/cli) | CLI tool for splitting and merging PDFs |
-| [@pdf-tools/utils](./packages/utils) | Shared PDF utilities using pdf-lib |
+| Package                              | Description                             |
+| ------------------------------------ | --------------------------------------- |
+| [@k-dang/pdf-tools](./apps/cli)      | CLI tool for splitting and merging PDFs |
+| [@pdf-tools/utils](./packages/utils) | Shared PDF utilities using pdf-lib      |
 
 ## Getting Started
 
