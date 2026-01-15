@@ -1,5 +1,14 @@
 import { PDFDocument } from "pdf-lib";
 
+/**
+ * Get the number of pages in a PDF file
+ */
+export async function getPageCount(filePath: string): Promise<number> {
+  const bytes = await Bun.file(filePath).arrayBuffer();
+  const pdf = await PDFDocument.load(bytes);
+  return pdf.getPageCount();
+}
+
 export async function splitPDF(
   inputPath: string,
   outputPath: string,
