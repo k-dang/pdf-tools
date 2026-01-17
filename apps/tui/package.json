@@ -4,15 +4,10 @@
   "type": "module",
   "private": false,
   "bin": {
-    "pdf-tools-tui": "bin.js"
+    "pdf-tools-tui": "dist/tui.js"
   },
   "files": [
-    "bin.js",
-    "dist/pdf-tools-tui-darwin-arm64",
-    "dist/pdf-tools-tui-darwin-x64",
-    "dist/pdf-tools-tui-linux-arm64",
-    "dist/pdf-tools-tui-linux-x64",
-    "dist/pdf-tools-tui-windows-x64.exe"
+    "dist/tui.js"
   ],
   "author": "Kevin Dang",
   "repository": {
@@ -43,7 +38,7 @@
     "dev": "bun run tui.tsx",
     "build": "bun run scripts/build.ts",
     "check": "tsc --noEmit",
-    "publish:npm": "bun run scripts/publish.ts"
+    "publish:npm": "bun run build && npm publish --access public"
   },
   "publishConfig": {
     "access": "public"

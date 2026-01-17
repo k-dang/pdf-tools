@@ -1,67 +1,33 @@
+#!/usr/bin/env bun
 import { $ } from "bun";
-import path from "path";
-import fs from "fs";
-import { fileURLToPath } from "url";
+import { chmodSync, mkdirSync, rmSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dir = path.resolve(__dirname, "..");
+const __dirname = dirname(__filename);
+const dir = join(__dirname, "..");
 
 process.chdir(dir);
 
-import pkg from "../package.json";
+const distDir = join(process.cwd(), "dist");
+const distPath = join(distDir, "tui.js");
 
-const VERSION = pkg.version;
+console.log("📦 Building TUI package...");
+rmSync(distDir, { recursive: true, force: true });
+mkdirSync(distDir, { recursive: true });
 
-const targets = [
-  "bun-darwin-arm64",
-  "bun-darwin-x64",
-  "bun-linux-x64",
-  "bun-linux-arm64",
-  "bun-windows-x64",
-] as const;
+await $`bun build tui.tsx --outdir dist --target bun --format esm --sourcemap --minify`;
 
-const outputNames: Record<(typeof targets)[number], string> = {
-  "bun-darwin-arm64": "pdf-tools-tui-darwin-arm64",
-  "bun-darwin-x64": "pdf-tools-tui-darwin-x64",
-  "bun-linux-x64": "pdf-tools-tui-linux-x64",
-  "bun-linux-arm64": "pdf-tools-tui-linux-arm64",
-  "bun-windows-x64": "pdf-tools-tui-windows-x64.exe",
-};
+const content = await Bun.file(distPath).text();
+const shebang = "#!/usr/bin/env bun\n";
+const withShebang = content.startsWith(shebang) ? content : `${shebang}${content}`;
+await Bun.write(distPath, withShebang);
 
-console.log("Installing opentui for all platforms...");
-const opentuiCoreVersion = pkg.dependencies["@opentui/core"];
-const opentuiReactVersion = pkg.dependencies["@opentui/react"];
-
-await $`bun install --os="*" --cpu="*" @opentui/core@${opentuiCoreVersion}`;
-await $`bun install --os="*" --cpu="*" @opentui/react@${opentuiReactVersion}`;
-console.log("Done installing opentui for all platforms");
-
-await $`rm -rf dist`;
-await $`mkdir -p dist`;
-
-for (const target of targets) {
-  const outfile = `dist/${outputNames[target]}`;
-  console.log(`Building ${target} -> ${outfile} (v${VERSION})`);
-
-  const result = await Bun.build({
-    entrypoints: ["./tui.tsx"],
-    target: "bun",
-    define: {
-      __VERSION__: JSON.stringify(VERSION),
-    },
-    compile: {
-      target,
-      outfile,
-    },
-  });
-
-  if (!result.success) {
-    console.error(`Build failed for ${target}:`, result.logs);
-    process.exit(1);
-  }
-
-  console.log(`  ✓ Built ${outfile}`);
+try {
+  chmodSync(distPath, 0o755);
+} catch {
+  // Ignore on Windows.
 }
 
-console.log("\nDone building all targets");
+console.log("✓ Build complete: dist/tui.js");
