@@ -17,7 +17,10 @@
         "pdf-tools": "./dist/cli.js",
       },
       "dependencies": {
+        "@opentui/core": "^0.1.69",
+        "@opentui/react": "^0.1.69",
         "meow": "^14.0.0",
+        "react": "^19.0.0",
       },
       "devDependencies": {
         "@pdf-tools/utils": "workspace:*",

@@ -10,10 +10,12 @@ Usage
 Commands
   split    Extract pages from a PDF
   merge    Merge multiple PDFs
+  tui      Launch the interactive TUI
 
 Examples
   $ pdf-tools split document.pdf --pages 6-8
   $ pdf-tools merge file1.pdf file2.pdf --output combined.pdf
+  $ pdf-tools tui
 `,
   importMeta: import.meta,
 });

@@ -22,6 +22,7 @@
     "pdf",
     "split",
     "merge",
+    "tui",
     "cli",
     "bun"
   ],
@@ -29,7 +30,10 @@
     "@pdf-tools/utils": "workspace:*"
   },
   "dependencies": {
-    "meow": "^14.0.0"
+    "@opentui/core": "^0.1.69",
+    "@opentui/react": "^0.1.69",
+    "meow": "^14.0.0",
+    "react": "^19.0.0"
   },
   "scripts": {
     "dev": "bun run cli.ts",

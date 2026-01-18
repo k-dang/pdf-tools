@@ -3,15 +3,34 @@
 ## Commands
 
 - `bun install` - Install dependencies
-- `bun run index.ts <input> --pages <pages>` - Run the CLI
 - `bun test` - Run tests (no tests yet, but this is command)
 - `bun run <script>` - Run npm scripts
 
+### CLI (apps/cli)
+
+Published as `@k-dang/pdf-tools` on npm. Entry point: `cli.ts` using meow for arg parsing.
+
+**Development:**
+- `bun run dev` - Run CLI in dev mode (from apps/cli)
+- `bun run build` - Build CLI + TUI to `dist/` (from apps/cli)
+- `bun run check` - Type check
+
+**Commands:**
+- `pdf-tools split <input> --pages <pages> [--output <file>]` - Extract pages from PDF
+- `pdf-tools merge <file1> <file2> [...] [--output <file>]` - Merge multiple PDFs
+- `pdf-tools tui` - Launch interactive TUI
+
+**Flags:**
+- `--pages, -p` - Page range (split only, required). Formats: `"6"`, `"6-8"`, `"1,3,5-8"`
+- `--output, -o` - Output filename (optional)
+
+**Command structure:** `apps/cli/src/commands/` contains `split.ts`, `merge.ts`, `tui.ts`, exported via `index.ts`
+
 ### TUI (apps/tui)
 
-- `bun run dev` - Run TUI in development mode
-- `bun run build` - Build all platform binaries
-- `bun run publish:npm` - Build and publish to npm
+- `bun run dev:tui` - Run TUI in development mode (standalone)
+- `bun run dev:cli -- tui` - Run TUI via CLI (dev mode)
+- TUI is bundled into CLI and launched via `pdf-tools tui`
 
 ## Code Style
 
@@ -34,52 +53,9 @@
 
 ## TUI Build Architecture
 
-The TUI app uses a **single-package multi-platform** approach (inspired by `better-context`):
+The TUI is an internal workspace package bundled into the CLI:
 
-### Entry Point (`bin.js`)
-
-- Detects user's platform/arch (e.g., `win32-x64`, `darwin-arm64`)
-- Maps to appropriate binary (e.g., `pdf-tools-tui-windows-x64.exe`)
-- Spawns the platform-specific binary using `Bun.spawnSync()`
-
-### Build Process (`scripts/build.ts`)
-
-- Installs OpenTUI for all platforms: `bun install --os="*" --cpu="*" @opentui/core`
-- Builds 5 platform binaries using `Bun.build({ compile: {...} })`
-- Outputs to `dist/`: darwin-arm64, darwin-x64, linux-arm64, linux-x64, windows-x64.exe
-
-### Package Structure
-
-```
-apps/tui/
-├── bin.js              # Entry point (platform detection & spawning)
-├── package.json
-├── scripts/
-│   ├── build.ts        # Build all platform binaries
-│   └── publish.ts     # Build, pack, and publish to npm
-└── dist/
-    ├── pdf-tools-tui-darwin-arm64
-    ├── pdf-tools-tui-darwin-x64
-    ├── pdf-tools-tui-linux-arm64
-    ├── pdf-tools-tui-linux-x64
-    └── pdf-tools-tui-windows-x64.exe
-```
-
-### Publishing
-
-- Single npm package: `@k-dang/pdf-tools-tui`
-- Contains all 5 platform binaries (~493MB unpacked, ~180MB compressed)
-- Users download all binaries but only run their platform's binary
-- Trade-off: Simpler implementation (1 package vs 6) vs larger downloads
-
-### Why This Approach?
-
-Compared to OpenCode's 6-package approach (main + 5 platforms):
-
-- ✅ Simpler: No optionalDependencies, postinstall scripts, or synchronized publishing
-- ✅ Easier to maintain: Single package to version and publish
-- ✅ Works perfectly: Proven by `better-context` and other tools
-- ⚠️ Larger downloads: All users download all binaries (~180MB compressed)
-- ⚠️ Wasted disk space: macOS users have Windows binaries, etc.
-
-For pdf-tools-tui (65-122MB binaries), this is acceptable since total compressed size (~180MB) is manageable.
+- TUI source lives in `apps/tui/` (private, not published separately)
+- CLI build script (`apps/cli/scripts/build.ts`) bundles both `cli.js` and `tui.js` into `apps/cli/dist/`
+- Users launch TUI via `pdf-tools tui` which spawns `bun dist/tui.js`
+- Only `@k-dang/pdf-tools` is published to npm (includes bundled TUI)

@@ -17,7 +17,7 @@ console.log("📦 Building TUI package...");
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
-await $`bun build tui.tsx --outdir dist --target bun --format esm --sourcemap --minify`;
+await $`bun build tui.tsx --outdir dist --target bun --format esm --sourcemap --minify --external @opentui/core --external @opentui/react --external react`;
 
 const content = await Bun.file(distPath).text();
 const shebang = "#!/usr/bin/env bun\n";

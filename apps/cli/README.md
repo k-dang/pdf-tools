@@ -7,6 +7,7 @@ A fast CLI tool to extract specific pages from PDF files and merge multiple PDFs
 - Extract single pages or page ranges from PDFs
 - Support for complex page specifications (e.g., `"1,3,5-8"`)
 - Merge multiple PDFs into a single file
+- Interactive TUI for visual file selection and page picking
 - Fast file operations using Bun runtime
 - Built with TypeScript for type safety
 
@@ -74,6 +75,20 @@ Merge multiple PDFs with custom output:
 ```bash
 pdf-tools merge file1.pdf file2.pdf file3.pdf --output combined.pdf
 ```
+
+### Interactive TUI
+
+Launch the interactive terminal UI for visual file browsing and page selection:
+
+```bash
+pdf-tools tui
+```
+
+The TUI provides:
+
+- File browser for selecting PDFs
+- Visual page picker for split operations
+- Multi-file selection for merge operations
 
 ## Page Range Format
 
