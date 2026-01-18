@@ -13,9 +13,7 @@
   "scripts": {
     "dev:cli": "bun run --filter=@k-dang/pdf-tools dev",
     "build:cli": "bun run --filter=@k-dang/pdf-tools build",
-    "dev:tui": "bun run --filter=@k-dang/pdf-tools-tui dev",
-    "build:tui": "bun run --filter=@k-dang/pdf-tools-tui build",
-    "check": "tsc --noEmit",
+    "check": "bun run --filter=@k-dang/pdf-tools check",
     "format": "prettier --write ."
   }
 }

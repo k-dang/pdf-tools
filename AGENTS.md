@@ -26,12 +26,6 @@ Published as `@k-dang/pdf-tools` on npm. Entry point: `cli.ts` using meow for ar
 
 **Command structure:** `apps/cli/src/commands/` contains `split.ts`, `merge.ts`, `tui.ts`, exported via `index.ts`
 
-### TUI (apps/tui)
-
-- `bun run dev:tui` - Run TUI in development mode (standalone)
-- `bun run dev:cli -- tui` - Run TUI via CLI (dev mode)
-- TUI is bundled into CLI and launched via `pdf-tools tui`
-
 ## Code Style
 
 - TypeScript strict mode (ESNext target, verbatimModuleSyntax)
@@ -53,9 +47,9 @@ Published as `@k-dang/pdf-tools` on npm. Entry point: `cli.ts` using meow for ar
 
 ## TUI Build Architecture
 
-The TUI is an internal workspace package bundled into the CLI:
+The TUI is bundled directly within the CLI:
 
-- TUI source lives in `apps/tui/` (private, not published separately)
+- TUI source lives in `apps/cli/src/tui/` (entry: `index.tsx`)
 - CLI build script (`apps/cli/scripts/build.ts`) bundles both `cli.js` and `tui.js` into `apps/cli/dist/`
 - Users launch TUI via `pdf-tools tui` which spawns `bun dist/tui.js`
 - Only `@k-dang/pdf-tools` is published to npm (includes bundled TUI)

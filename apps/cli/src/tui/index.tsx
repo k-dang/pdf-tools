@@ -3,11 +3,11 @@ import { createRoot, useKeyboard } from "@opentui/react";
 import { useState } from "react";
 import { basename, dirname } from "path";
 import { getPageCount, splitPDF, mergePDFs } from "@pdf-tools/utils";
-import { UnifiedBrowser } from "./src/components/UnifiedBrowser";
-import { PagePicker } from "./src/components/PagePicker";
-import { Processing } from "./src/components/Processing";
-import { Result } from "./src/components/Result";
-import { getSplitOutputPath, getMergeOutputPath } from "./src/utils/paths";
+import { UnifiedBrowser } from "./components/UnifiedBrowser";
+import { PagePicker } from "./components/PagePicker";
+import { Processing } from "./components/Processing";
+import { Result } from "./components/Result";
+import { getSplitOutputPath, getMergeOutputPath } from "./utils/paths";
 
 type Screen =
   | "main_menu"

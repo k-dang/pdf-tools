@@ -3,7 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "noEmit": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "jsxImportSource": "@opentui/react"
   },
   "include": ["cli.ts", "src/**/*", "scripts/**/*"],
   "exclude": ["node_modules", "dist"]

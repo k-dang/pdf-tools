@@ -27,7 +27,8 @@
     "bun"
   ],
   "devDependencies": {
-    "@pdf-tools/utils": "workspace:*"
+    "@pdf-tools/utils": "workspace:*",
+    "@types/react": "^19.0.0"
   },
   "dependencies": {
     "@opentui/core": "^0.1.69",

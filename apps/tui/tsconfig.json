@@ -1,7 +1,0 @@
-{
-  "extends": "../../tsconfig.json",
-  "exclude": [],
-  "compilerOptions": {
-    "jsxImportSource": "@opentui/react"
-  }
-}

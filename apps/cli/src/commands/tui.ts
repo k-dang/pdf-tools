@@ -15,7 +15,7 @@ const resolveTuiEntry = async () => {
     return distTuiPath;
   }
 
-  const devTuiPath = join(cliDir, "..", "tui", "tui.tsx");
+  const devTuiPath = join(cliDir, "src", "tui", "index.tsx");
   if (await Bun.file(devTuiPath).exists()) {
     return devTuiPath;
   }

@@ -42,7 +42,7 @@ const addShebang = async (path: string) => {
 };
 
 const cliResult = await buildEntrypoint("./cli.ts", "CLI");
-const tuiResult = await buildEntrypoint("../tui/tui.tsx", "TUI", tuiExternals);
+const tuiResult = await buildEntrypoint("./src/tui/index.tsx", "TUI", tuiExternals);
 
 await addShebang("./dist/cli.js");
 await addShebang("./dist/tui.js");
