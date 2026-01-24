@@ -1,3 +1,6 @@
+import { rename } from "node:fs/promises";
+import { basename, join } from "node:path";
+
 const shebang = "#!/usr/bin/env bun\n";
 
 /** Packages to keep as external runtime deps for the TUI. */
@@ -9,11 +12,12 @@ const tuiExternals = ["@opentui/core", "@opentui/react", "react"];
 const buildEntrypoint = async (
   entrypoint: string,
   label: string,
+  outdir: string,
   external?: string[],
 ) => {
   const result = await Bun.build({
     entrypoints: [entrypoint],
-    outdir: "./dist",
+    outdir,
     target: "bun",
     format: "esm",
     minify: true,
@@ -41,14 +45,42 @@ const addShebang = async (path: string) => {
   }
 };
 
-const cliResult = await buildEntrypoint("./cli.ts", "CLI");
-const tuiResult = await buildEntrypoint("./src/tui/index.tsx", "TUI", tuiExternals);
+const distDir = join(import.meta.dir, "..", "dist");
+const cliEntrypoint = join(import.meta.dir, "..", "cli.ts");
+const tuiEntrypoint = join(import.meta.dir, "..", "src", "tui", "index.tsx");
+const cliOutput = join(distDir, "cli.js");
+const tuiOutput = join(distDir, "tui.js");
 
-await addShebang("./dist/cli.js");
-await addShebang("./dist/tui.js");
+const cliResult = await buildEntrypoint(cliEntrypoint, "CLI", distDir);
+const tuiResult = await buildEntrypoint(
+  tuiEntrypoint,
+  "TUI",
+  distDir,
+  tuiExternals,
+);
+
+const tuiBuiltOutput = tuiResult.outputs.find((output) =>
+  output.path.endsWith(".js"),
+);
+if (!tuiBuiltOutput) {
+  console.error("TUI build produced no JS output");
+  process.exit(1);
+}
+
+const originalTuiPath = tuiBuiltOutput.path;
+
+if (basename(tuiBuiltOutput.path) !== "tui.js") {
+  await rename(tuiBuiltOutput.path, tuiOutput);
+}
+
+await addShebang(cliOutput);
+await addShebang(tuiOutput);
 
 console.log("Build successful");
 
 for (const output of [...cliResult.outputs, ...tuiResult.outputs]) {
-  console.log(`  - ${output.path} (${(output.size / 1024).toFixed(2)} KB)`);
+  const outputPath = output.path === originalTuiPath ? tuiOutput : output.path;
+  const outputSize =
+    output.path === originalTuiPath ? Bun.file(tuiOutput).size : output.size;
+  console.log(`  - ${outputPath} (${(outputSize / 1024).toFixed(2)} KB)`);
 }
