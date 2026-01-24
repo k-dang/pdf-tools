@@ -7,10 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 bun install              # Install dependencies
 bun run dev:cli          # Run CLI in development mode
-bun run build:cli        # Build CLI binary
-bun run dev:tui          # Run TUI in development mode
-bun run build:tui        # Build TUI binary
-bun run check            # TypeScript type checking (excludes TUI)
+bun run build:cli        # Build CLI binary (includes TUI)
+bun run check            # TypeScript type checking
 bun run format           # Format code with Prettier
 bun test                 # Run tests (use bun test <file> for single file)
 ```
@@ -21,15 +19,16 @@ This is a Bun-powered monorepo for PDF manipulation tools.
 
 **Monorepo structure:**
 
-- `apps/cli` - @k-dang/pdf-tools CLI (published to npm)
-- `apps/tui` - @k-dang/pdf-tools-tui interactive terminal UI (OpenTUI React)
+- `apps/cli` - @k-dang/pdf-tools CLI with integrated TUI (published to npm)
 - `packages/utils` - @pdf-tools/utils shared PDF utilities
 
 **CLI entry point:** `apps/cli/cli.ts` uses meow for argument parsing, delegates to command handlers in `apps/cli/src/commands/`.
 
-**TUI entry point:** `apps/tui/tui.tsx` uses OpenTUI React for interactive terminal UI with file browser and menu navigation.
+**CLI commands:** `split`, `merge`, and `tui` (launches interactive terminal UI).
 
-**PDF operations:** `packages/utils/src/pdf.ts` contains `splitPDF()` and `mergePDFs()` using pdf-lib.
+**TUI:** `apps/cli/src/tui/` contains the OpenTUI React application for interactive file browsing and page selection. Launched via `pdf-tools tui` command.
+
+**PDF operations:** `packages/utils/src/pdf.ts` contains `splitPDF()`, `mergePDFs()`, and `getPageCount()` using pdf-lib.
 
 **Page range parser:** `packages/utils/src/parser.ts` handles formats like "1,3,5-8".
 
@@ -45,4 +44,4 @@ This is a Bun-powered monorepo for PDF manipulation tools.
 
 - **pdf-lib** - PDF manipulation
 - **meow** - CLI argument parsing
-- **@opentui/react** - TUI components and hooks (useKeyboard, useRenderer)
+- **@opentui/react** - TUI components and hooks (useKeyboard, useRenderer, useInput)
