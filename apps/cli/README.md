@@ -21,6 +21,12 @@ bun install -g @k-dang/pdf-tools
 
 ## Usage
 
+```bash
+pdf-tools split <input-file> --pages <pages> [--output <output-file>]
+pdf-tools merge <file1.pdf> <file2.pdf> [file3.pdf ...] [--output <output-file>]
+pdf-tools tui
+```
+
 ### Extract Pages
 
 ```bash
@@ -95,19 +101,3 @@ The TUI provides:
 - Single page: `"6"`
 - Page range: `"6-8"` (includes pages 6, 7, and 8)
 - Multiple pages/ranges: `"1,3,5-8"` (pages 1, 3, 5, 6, 7, 8)
-
-## Development
-
-### Prerequisites
-
-You need [Bun](https://bun.sh) installed to develop this tool:
-
-```bash
-curl -fsSL https://bun.sh/install | bash
-```
-
-### Setup
-
-```bash
-bun install
-```
