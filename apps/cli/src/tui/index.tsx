@@ -12,6 +12,7 @@ import { getSplitOutputPath, getMergeOutputPath } from "./utils/paths";
 type Screen =
   | "main_menu"
   | "split_file_select"
+  | "split_loading"
   | "split_page_select"
   | "split_processing"
   | "split_result"
@@ -86,6 +87,7 @@ function App() {
   const handleSplitFileSelect = async (filePath: string) => {
     setSplitFile(filePath);
     setSplitSelectedPages(new Set());
+    setScreen("split_loading");
 
     try {
       const count = await getPageCount(filePath);
@@ -112,14 +114,20 @@ function App() {
     });
   };
 
-  const handleSplitConfirm = async () => {
+  const handleSplitConfirm = async (overridePages?: number[]) => {
     setScreen("split_processing");
 
     try {
       const fileName = basename(splitFile!);
       const fileDir = dirname(splitFile!);
       const outputPath = getSplitOutputPath(fileName, fileDir);
-      const pages = Array.from(splitSelectedPages).sort((a, b) => a - b);
+      const pages = overridePages
+        ? [...overridePages].sort((a, b) => a - b)
+        : Array.from(splitSelectedPages).sort((a, b) => a - b);
+
+      if (overridePages) {
+        setSplitSelectedPages(new Set(overridePages));
+      }
 
       await splitPDF(splitFile!, outputPath, pages);
 
@@ -216,6 +224,10 @@ function App() {
         onBack={handleReturnToMenu}
       />
     );
+  }
+
+  if (screen === "split_loading") {
+    return <Processing message="Loading PDF..." />;
   }
 
   if (screen === "split_page_select") {
