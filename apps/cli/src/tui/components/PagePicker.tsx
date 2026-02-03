@@ -11,7 +11,7 @@ interface PagePickerProps {
   onBack: () => void;
 }
 
-const COLS = 5;
+const COLS = 10;
 const VISIBLE_ROWS = 10;
 const LARGE_PDF_THRESHOLD = 300;
 
@@ -32,15 +32,17 @@ export function PagePicker({
   const [rangeError, setRangeError] = useState<string | null>(null);
 
   const totalRows = Math.ceil(pageCount / COLS);
+  const maxWindowStartRow = Math.max(0, totalRows - VISIBLE_ROWS);
 
   const clamp = (value: number, min: number, max: number) =>
     Math.min(max, Math.max(min, value));
 
   const ensureFocusVisible = (nextFocus: number) => {
     const focusRow = Math.floor(nextFocus / COLS);
-    if (focusRow < windowStartRow) {
+    const currentWindowStartRow = clamp(windowStartRow, 0, maxWindowStartRow);
+    if (focusRow < currentWindowStartRow) {
       setWindowStartRow(focusRow);
-    } else if (focusRow >= windowStartRow + VISIBLE_ROWS) {
+    } else if (focusRow >= currentWindowStartRow + VISIBLE_ROWS) {
       setWindowStartRow(focusRow - VISIBLE_ROWS + 1);
     }
   };
@@ -125,22 +127,14 @@ export function PagePicker({
       });
     } else if (key.name === "pageup" || key.name === "[") {
       setWindowStartRow((row) => {
-        const nextRow = clamp(
-          row - VISIBLE_ROWS,
-          0,
-          Math.max(0, totalRows - 1),
-        );
+        const nextRow = clamp(row - VISIBLE_ROWS, 0, maxWindowStartRow);
         const nextFocus = clamp(nextRow * COLS, 0, pageCount - 1);
         setFocusIndex(nextFocus);
         return nextRow;
       });
     } else if (key.name === "pagedown" || key.name === "]") {
       setWindowStartRow((row) => {
-        const nextRow = clamp(
-          row + VISIBLE_ROWS,
-          0,
-          Math.max(0, totalRows - 1),
-        );
+        const nextRow = clamp(row + VISIBLE_ROWS, 0, maxWindowStartRow);
         const nextFocus = clamp(nextRow * COLS, 0, pageCount - 1);
         setFocusIndex(nextFocus);
         return nextRow;
@@ -161,7 +155,8 @@ export function PagePicker({
 
   // Build rows for the grid (virtualized)
   const rows: number[][] = [];
-  const startIndex = windowStartRow * COLS;
+  const effectiveWindowStartRow = clamp(windowStartRow, 0, maxWindowStartRow);
+  const startIndex = effectiveWindowStartRow * COLS;
   const endIndex = Math.min(pageCount, startIndex + VISIBLE_ROWS * COLS);
   for (let i = startIndex; i < endIndex; i += COLS) {
     const row: number[] = [];
@@ -209,6 +204,7 @@ export function PagePicker({
             }}
           >
             {rows.map((row, rowIdx) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: <It's fine>
               <box key={rowIdx} flexDirection="row">
                 {row.map((pageIdx) => {
                   const pageNum = pageIdx + 1; // 1-based for display
