@@ -12,7 +12,7 @@
     },
     "apps/cli": {
       "name": "@k-dang/pdf-tools",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "bin": {
         "pdf-tools": "./dist/cli.js",
       },
