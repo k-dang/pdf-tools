@@ -93,7 +93,11 @@ export function UnifiedBrowser({
       } else if (item.type === "file") {
         if (mode === "single") {
           onFileSelect(item.path);
-        } else if (mode === "multi" && selectedFiles.size >= 2 && onFilesConfirm) {
+        } else if (
+          mode === "multi" &&
+          selectedFiles.size >= 2 &&
+          onFilesConfirm
+        ) {
           onFilesConfirm([...selectedFiles]);
         }
       }
@@ -169,7 +173,9 @@ export function UnifiedBrowser({
 
             return (
               <text key={item.path}>
-                <span fg={isFocused ? "cyan" : isSelected ? "green" : undefined}>
+                <span
+                  fg={isFocused ? "cyan" : isSelected ? "green" : undefined}
+                >
                   {prefix}
                   {label}
                 </span>
@@ -182,7 +188,8 @@ export function UnifiedBrowser({
         <box style={{ marginTop: 1 }}>
           <text>
             <span fg="green">
-              Selected: {[...selectedFiles].map((p) => p.split(/[/\\]/).pop()).join(", ")}
+              Selected:{" "}
+              {[...selectedFiles].map((p) => p.split(/[/\\]/).pop()).join(", ")}
             </span>
           </text>
         </box>

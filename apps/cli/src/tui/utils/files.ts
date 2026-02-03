@@ -7,9 +7,7 @@ import { join, dirname, parse } from "path";
 export function listPdfFiles(directory: string = process.cwd()): string[] {
   try {
     const files = readdirSync(directory);
-    return files
-      .filter((f) => f.toLowerCase().endsWith(".pdf"))
-      .sort();
+    return files.filter((f) => f.toLowerCase().endsWith(".pdf")).sort();
   } catch {
     return [];
   }

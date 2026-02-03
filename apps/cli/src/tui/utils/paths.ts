@@ -5,7 +5,7 @@ import { basename, extname, join } from "path";
  */
 export function getSplitOutputPath(
   inputPath: string,
-  outputDir: string = process.cwd()
+  outputDir: string = process.cwd(),
 ): string {
   const base = basename(inputPath, extname(inputPath));
   return join(outputDir, `${base}_split.pdf`);

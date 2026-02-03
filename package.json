@@ -12,7 +12,10 @@
   },
   "scripts": {
     "dev:cli": "bun run --filter=@k-dang/pdf-tools dev",
+    "dev:web": "bun run --filter=web dev",
     "build:cli": "bun run --filter=@k-dang/pdf-tools build",
+    "build:web": "bun run --filter=web build",
+    "start:web": "bun run --filter=web start",
     "check": "bun run --filter=@k-dang/pdf-tools check",
     "format": "prettier --write ."
   }
