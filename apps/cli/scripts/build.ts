@@ -13,7 +13,7 @@ const buildEntrypoint = async (
   entrypoint: string,
   label: string,
   outdir: string,
-  external?: string[],
+  external?: string[]
 ) => {
   const result = await Bun.build({
     entrypoints: [entrypoint],
@@ -56,11 +56,11 @@ const tuiResult = await buildEntrypoint(
   tuiEntrypoint,
   "TUI",
   distDir,
-  tuiExternals,
+  tuiExternals
 );
 
 const tuiBuiltOutput = tuiResult.outputs.find((output) =>
-  output.path.endsWith(".js"),
+  output.path.endsWith(".js")
 );
 if (!tuiBuiltOutput) {
   console.error("TUI build produced no JS output");

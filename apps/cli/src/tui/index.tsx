@@ -53,7 +53,7 @@ function App() {
   const [splitFile, setSplitFile] = useState<string | null>(null);
   const [splitPageCount, setSplitPageCount] = useState(0);
   const [splitSelectedPages, setSplitSelectedPages] = useState<Set<number>>(
-    new Set(),
+    new Set()
   );
 
   // Merge flow state
@@ -95,7 +95,7 @@ function App() {
       setScreen("split_page_select");
     } catch (error) {
       setResultMessage(
-        `Failed to load PDF: ${error instanceof Error ? error.message : String(error)}`,
+        `Failed to load PDF: ${error instanceof Error ? error.message : String(error)}`
       );
       setResultIsError(true);
       setScreen("split_result");
@@ -132,12 +132,12 @@ function App() {
       await splitPDF(splitFile!, outputPath, pages);
 
       setResultMessage(
-        `Successfully extracted ${pages.length} page(s) to ${fileName.replace(".pdf", "_split.pdf")}`,
+        `Successfully extracted ${pages.length} page(s) to ${fileName.replace(".pdf", "_split.pdf")}`
       );
       setResultIsError(false);
     } catch (error) {
       setResultMessage(
-        `Split failed: ${error instanceof Error ? error.message : String(error)}`,
+        `Split failed: ${error instanceof Error ? error.message : String(error)}`
       );
       setResultIsError(true);
     }
@@ -158,12 +158,12 @@ function App() {
       await mergePDFs(filePaths, outputPath);
 
       setResultMessage(
-        `Successfully merged ${filePaths.length} files into merged.pdf`,
+        `Successfully merged ${filePaths.length} files into merged.pdf`
       );
       setResultIsError(false);
     } catch (error) {
       setResultMessage(
-        `Merge failed: ${error instanceof Error ? error.message : String(error)}`,
+        `Merge failed: ${error instanceof Error ? error.message : String(error)}`
       );
       setResultIsError(true);
     }

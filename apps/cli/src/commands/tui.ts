@@ -28,7 +28,7 @@ export const tuiCommand = {
     const entryPath = await resolveTuiEntry();
     if (!entryPath) {
       console.error(
-        "TUI entrypoint not found. Try rebuilding the CLI with `bun run build:cli`.",
+        "TUI entrypoint not found. Try rebuilding the CLI with `bun run build:cli`."
       );
       process.exit(1);
     }

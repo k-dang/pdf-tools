@@ -78,7 +78,7 @@ export function FadeIn({
           setIsVisible(false);
         }
       },
-      { threshold, rootMargin: "0px 0px -50px 0px" },
+      { threshold, rootMargin: "0px 0px -50px 0px" }
     );
 
     observer.observe(element);
@@ -94,7 +94,7 @@ export function FadeIn({
       className={cn(
         "transition-all ease-out",
         isVisible ? animate : initial,
-        className,
+        className
       )}
       style={{
         transitionDuration: `${duration}ms`,
@@ -137,7 +137,7 @@ export function FadeInGroup({
           observer.unobserve(element);
         }
       },
-      { threshold, rootMargin: "0px 0px -50px 0px" },
+      { threshold, rootMargin: "0px 0px -50px 0px" }
     );
 
     observer.observe(element);
@@ -155,7 +155,7 @@ export function FadeInGroup({
               key={index}
               className={cn(
                 "transition-all ease-out",
-                isVisible ? animate : initial,
+                isVisible ? animate : initial
               )}
               style={{
                 transitionDuration: `${duration}ms`,

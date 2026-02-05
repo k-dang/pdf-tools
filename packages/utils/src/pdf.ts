@@ -12,7 +12,7 @@ export async function getPageCount(filePath: string): Promise<number> {
 export async function splitPDF(
   inputPath: string,
   outputPath: string,
-  pages: number[],
+  pages: number[]
 ): Promise<void> {
   const file = Bun.file(inputPath);
   const existingPdfBytes = await file.arrayBuffer();
@@ -23,7 +23,7 @@ export async function splitPDF(
   for (const pageNum of pages) {
     if (pageNum < 1 || pageNum > totalPages) {
       throw new Error(
-        `Page ${pageNum} is out of range. PDF has ${totalPages} pages.`,
+        `Page ${pageNum} is out of range. PDF has ${totalPages} pages.`
       );
     }
   }
@@ -41,13 +41,13 @@ export async function splitPDF(
 
   await Bun.write(outputPath, pdfBytes);
   console.log(
-    `✓ Successfully extracted ${pages.length} page(s) to ${outputPath}`,
+    `✓ Successfully extracted ${pages.length} page(s) to ${outputPath}`
   );
 }
 
 export async function mergePDFs(
   inputPaths: string[],
-  outputPath: string,
+  outputPath: string
 ): Promise<void> {
   const mergedPdfDoc = await PDFDocument.create();
   let totalPages = 0;
@@ -59,7 +59,7 @@ export async function mergePDFs(
     const pdfDoc = await PDFDocument.load(existingPdfBytes);
     const copiedPages = await mergedPdfDoc.copyPages(
       pdfDoc,
-      pdfDoc.getPageIndices(),
+      pdfDoc.getPageIndices()
     );
 
     for (const page of copiedPages) {
@@ -72,6 +72,6 @@ export async function mergePDFs(
   const pdfBytes = await mergedPdfDoc.save();
   await Bun.write(outputPath, pdfBytes);
   console.log(
-    `✓ Successfully merged ${totalPages} page(s) from ${inputPaths.length} file(s) to ${outputPath}`,
+    `✓ Successfully merged ${totalPages} page(s) from ${inputPaths.length} file(s) to ${outputPath}`
   );
 }

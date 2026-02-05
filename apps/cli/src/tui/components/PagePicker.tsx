@@ -26,7 +26,7 @@ export function PagePicker({
   const [focusIndex, setFocusIndex] = useState(0);
   const [windowStartRow, setWindowStartRow] = useState(0);
   const [mode, setMode] = useState<"grid" | "range">(
-    pageCount >= LARGE_PDF_THRESHOLD ? "range" : "grid",
+    pageCount >= LARGE_PDF_THRESHOLD ? "range" : "grid"
   );
   const [rangeInput, setRangeInput] = useState("");
   const [rangeError, setRangeError] = useState<string | null>(null);
@@ -85,7 +85,7 @@ export function PagePicker({
           onConfirm(pages);
         } catch (error) {
           setRangeError(
-            error instanceof Error ? error.message : "Invalid page range.",
+            error instanceof Error ? error.message : "Invalid page range."
           );
         }
         return;

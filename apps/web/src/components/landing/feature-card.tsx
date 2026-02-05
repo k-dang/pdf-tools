@@ -27,7 +27,7 @@ export function FeatureCard({
           "group relative rounded-xl border border-white/10 bg-card p-6 h-full",
           "transition-all duration-300",
           "hover:border-accent-green/30 hover:bg-card/80",
-          className,
+          className
         )}
       >
         {/* Glow effect on hover */}

@@ -30,7 +30,7 @@ export const splitCommand = {
             shortFlag: "o",
           },
         },
-      },
+      }
     );
 
     const inputFile = cli.input[0];
@@ -61,7 +61,7 @@ export const splitCommand = {
     } catch (error) {
       console.error(
         "Error:",
-        error instanceof Error ? error.message : String(error),
+        error instanceof Error ? error.message : String(error)
       );
       process.exit(1);
     }

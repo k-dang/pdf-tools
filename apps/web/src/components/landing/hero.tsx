@@ -9,7 +9,7 @@ async function getNpmVersion(): Promise<string> {
   try {
     const res = await fetch(
       "https://registry.npmjs.org/@k-dang/pdf-tools/latest",
-      { next: { revalidate: 3600 } }, // Cache for 1 hour
+      { next: { revalidate: 3600 } } // Cache for 1 hour
     );
     if (!res.ok) return FALLBACK_VERSION;
     const data = await res.json();
@@ -90,7 +90,7 @@ export async function Hero() {
 
       {/* Background gradient */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-green/5 blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-125 w-200 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent-green/5 blur-3xl" />
       </div>
     </section>
   );

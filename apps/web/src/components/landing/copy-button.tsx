@@ -26,7 +26,7 @@ export function CopyButton({ text, className }: CopyButtonProps) {
         "text-muted-foreground hover:text-foreground",
         "hover:bg-white/10 hover-glow",
         copied && "text-accent-green",
-        className,
+        className
       )}
       aria-label={copied ? "Copied!" : "Copy to clipboard"}
     >
