@@ -9,7 +9,7 @@ async function getNpmVersion(): Promise<string> {
   try {
     const res = await fetch(
       "https://registry.npmjs.org/@k-dang/pdf-tools/latest",
-      { next: { revalidate: 3600 } } // Cache for 1 hour
+      { next: { revalidate: 3600 } }, // Cache for 1 hour
     );
     if (!res.ok) return FALLBACK_VERSION;
     const data = await res.json();
@@ -49,9 +49,7 @@ export async function Hero() {
 
           {/* Terminal */}
           <Terminal
-            lines={[
-              { prompt: "$ ", command: "bun add -g @k-dang/pdf-tools" },
-            ]}
+            lines={[{ prompt: "$ ", command: "bun add -g @k-dang/pdf-tools" }]}
             showCopyButton
             className="mb-10 w-full max-w-xl"
           />

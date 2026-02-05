@@ -129,10 +129,12 @@
 
 /* Terminal Noir Animations */
 @keyframes cursor-blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -168,11 +170,21 @@
 }
 
 /* Staggered animation delays */
-.animation-delay-100 { animation-delay: 100ms; }
-.animation-delay-200 { animation-delay: 200ms; }
-.animation-delay-300 { animation-delay: 300ms; }
-.animation-delay-400 { animation-delay: 400ms; }
-.animation-delay-500 { animation-delay: 500ms; }
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
 
 /* Code block styling */
 .code-block {
@@ -184,25 +196,43 @@
 
 /* Typing cursor */
 .typing-cursor::after {
-  content: '▋';
+  content: "▋";
   color: var(--accent-green);
   animation: cursor-blink 1s step-end infinite;
   margin-left: 2px;
 }
 
 /* Code syntax colors */
-.syntax-command { color: #22c55e; }
-.syntax-flag { color: #f59e0b; }
-.syntax-string { color: #a78bfa; }
-.syntax-number { color: #38bdf8; }
-.syntax-path { color: #fafafa; }
-.syntax-comment { color: #71717a; }
-.syntax-prompt { color: #71717a; }
-.syntax-success { color: #22c55e; }
+.syntax-command {
+  color: #22c55e;
+}
+.syntax-flag {
+  color: #f59e0b;
+}
+.syntax-string {
+  color: #a78bfa;
+}
+.syntax-number {
+  color: #38bdf8;
+}
+.syntax-path {
+  color: #fafafa;
+}
+.syntax-comment {
+  color: #71717a;
+}
+.syntax-prompt {
+  color: #71717a;
+}
+.syntax-success {
+  color: #22c55e;
+}
 
 /* Hover glow effect for buttons */
 .hover-glow {
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.2s ease;
 }
 
 .hover-glow:hover {

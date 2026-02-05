@@ -7,33 +7,38 @@ export function MergeDemo() {
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Terminal demo - order reversed for alternating layout */}
-          <FadeIn variant="fade-right" delay={150} duration={700} className="lg:order-1">
+          <FadeIn
+            variant="fade-right"
+            delay={150}
+            duration={700}
+            className="lg:order-1"
+          >
             <div className="flex flex-col gap-4">
               <Terminal
-              lines={[
-                { comment: "# Merge two documents" },
-                {
-                  prompt: "$ ",
-                  command: "pdf-tools merge intro.pdf content.pdf",
-                },
-                { output: "✓ Created merged.pdf (24 pages)" },
-                { output: "" },
-                { comment: "# Merge multiple files with custom output" },
-                {
-                  prompt: "$ ",
-                  command:
-                    "pdf-tools merge ch1.pdf ch2.pdf ch3.pdf -o book.pdf",
-                },
-                { output: "✓ Created book.pdf (156 pages)" },
-                { output: "" },
-                { comment: "# Use glob patterns" },
-                {
-                  prompt: "$ ",
-                  command: "pdf-tools merge ./chapters/*.pdf -o complete.pdf",
-                },
-                { output: "✓ Merged 12 files → complete.pdf" },
-              ]}
-            />
+                lines={[
+                  { comment: "# Merge two documents" },
+                  {
+                    prompt: "$ ",
+                    command: "pdf-tools merge intro.pdf content.pdf",
+                  },
+                  { output: "✓ Created merged.pdf (24 pages)" },
+                  { output: "" },
+                  { comment: "# Merge multiple files with custom output" },
+                  {
+                    prompt: "$ ",
+                    command:
+                      "pdf-tools merge ch1.pdf ch2.pdf ch3.pdf -o book.pdf",
+                  },
+                  { output: "✓ Created book.pdf (156 pages)" },
+                  { output: "" },
+                  { comment: "# Use glob patterns" },
+                  {
+                    prompt: "$ ",
+                    command: "pdf-tools merge ./chapters/*.pdf -o complete.pdf",
+                  },
+                  { output: "✓ Merged 12 files → complete.pdf" },
+                ]}
+              />
             </div>
           </FadeIn>
 
@@ -46,8 +51,8 @@ export function MergeDemo() {
             </FadeIn>
             <FadeIn variant="fade-left" delay={100} duration={600}>
               <p className="mb-6 text-lg text-muted-foreground">
-                Merge multiple PDFs into a single document. Works with any number
-                of files, preserving quality and metadata.
+                Merge multiple PDFs into a single document. Works with any
+                number of files, preserving quality and metadata.
               </p>
             </FadeIn>
 

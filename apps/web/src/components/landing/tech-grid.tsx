@@ -30,7 +30,12 @@ export function TechGrid() {
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, i) => (
-            <FadeIn key={feature.title} variant="fade-up" delay={i * 100} duration={500}>
+            <FadeIn
+              key={feature.title}
+              variant="fade-up"
+              delay={i * 100}
+              duration={500}
+            >
               <TechCard
                 icon={feature.icon}
                 title={feature.title}

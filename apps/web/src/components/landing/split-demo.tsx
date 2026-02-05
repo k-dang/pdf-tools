@@ -15,8 +15,8 @@ export function SplitDemo() {
             </FadeIn>
             <FadeIn variant="fade-right" delay={100} duration={600}>
               <p className="mb-6 text-lg text-muted-foreground">
-                Precise page extraction with flexible range syntax. Single pages,
-                ranges, or complex selections — all in one command.
+                Precise page extraction with flexible range syntax. Single
+                pages, ranges, or complex selections — all in one command.
               </p>
             </FadeIn>
 
@@ -40,9 +40,7 @@ export function SplitDemo() {
                 <div className="flex items-center gap-3">
                   <span className="syntax-number">1,3,5-8</span>
                   <span className="text-muted-foreground">→</span>
-                  <span className="text-muted-foreground">
-                    Mixed selection
-                  </span>
+                  <span className="text-muted-foreground">Mixed selection</span>
                 </div>
               </FadeIn>
             </div>
@@ -52,30 +50,30 @@ export function SplitDemo() {
           <FadeIn variant="fade-left" delay={150} duration={700}>
             <div className="flex flex-col gap-4">
               <Terminal
-              lines={[
-                { comment: "# Extract a single page" },
-                {
-                  prompt: "$ ",
-                  command: 'pdf-tools split report.pdf --pages "6"',
-                },
-                { output: "✓ Created report_pages_6.pdf" },
-                { output: "" },
-                { comment: "# Extract a range of pages" },
-                {
-                  prompt: "$ ",
-                  command: 'pdf-tools split book.pdf -p "1-10"',
-                },
-                { output: "✓ Created book_pages_1-10.pdf" },
-                { output: "" },
-                { comment: "# Complex selection with custom output" },
-                {
-                  prompt: "$ ",
-                  command:
-                    'pdf-tools split doc.pdf -p "1,3,5-8" -o selected.pdf',
-                },
-                { output: "✓ Created selected.pdf (6 pages)" },
-              ]}
-            />
+                lines={[
+                  { comment: "# Extract a single page" },
+                  {
+                    prompt: "$ ",
+                    command: 'pdf-tools split report.pdf --pages "6"',
+                  },
+                  { output: "✓ Created report_pages_6.pdf" },
+                  { output: "" },
+                  { comment: "# Extract a range of pages" },
+                  {
+                    prompt: "$ ",
+                    command: 'pdf-tools split book.pdf -p "1-10"',
+                  },
+                  { output: "✓ Created book_pages_1-10.pdf" },
+                  { output: "" },
+                  { comment: "# Complex selection with custom output" },
+                  {
+                    prompt: "$ ",
+                    command:
+                      'pdf-tools split doc.pdf -p "1,3,5-8" -o selected.pdf',
+                  },
+                  { output: "✓ Created selected.pdf (6 pages)" },
+                ]}
+              />
             </div>
           </FadeIn>
         </div>

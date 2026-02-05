@@ -9,7 +9,8 @@ export function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             {/* Logo / Name */}
             <div className="font-mono text-sm text-muted-foreground">
-              <span className="text-foreground">pdf-tools</span> — Built with Bun
+              <span className="text-foreground">pdf-tools</span> — Built with
+              Bun
             </div>
 
             {/* Links */}

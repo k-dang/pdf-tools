@@ -18,12 +18,14 @@ bun run lint             # Run ESLint
 Next.js 16 web application using the App Router, part of the pdf-tools monorepo.
 
 **Tech stack:**
+
 - Next.js 16 with React 19 and React Compiler
 - Tailwind CSS v4 with PostCSS
 - shadcn/ui (new-york style) with Radix UI primitives
 - Lucide React for icons
 
 **Directory structure:**
+
 - `src/app/` - App Router pages and layouts
 - `src/components/` - React components (shadcn/ui components go in `src/components/ui/`)
 - `src/lib/` - Utilities (e.g., `cn()` for Tailwind class merging)

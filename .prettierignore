@@ -1,0 +1,15 @@
+node_modules
+**/.next
+dist
+out
+coverage
+*.tgz
+.cache
+.eslintcache
+*.tsbuildinfo
+testfiles
+.idea
+.DS_Store
+logs
+_.log
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
