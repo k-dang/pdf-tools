@@ -38,7 +38,7 @@ export const mergeCommand = {
     }
 
     try {
-      let outputPath = (cli.flags.output as string) || "merged.pdf";
+      let outputPath = cli.flags.output || "merged.pdf";
 
       const firstInputDir = dirname(inputFiles[0]!);
       if (!isAbsolute(outputPath)) {

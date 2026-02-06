@@ -151,6 +151,7 @@ function App() {
     setScreen("merge_processing");
 
     try {
+      const selectedNames = filePaths.map((filePath) => basename(filePath));
       // Output to the directory of the first file
       const outputDir = dirname(filePaths[0]!);
       const outputPath = getMergeOutputPath(outputDir);
@@ -158,12 +159,13 @@ function App() {
       await mergePDFs(filePaths, outputPath);
 
       setResultMessage(
-        `Successfully merged ${filePaths.length} files into merged.pdf`
+        `Successfully merged ${filePaths.length} file(s): ${selectedNames.join(", ")} -> ${basename(outputPath)}`
       );
       setResultIsError(false);
     } catch (error) {
+      const selectedNames = filePaths.map((filePath) => basename(filePath));
       setResultMessage(
-        `Merge failed: ${error instanceof Error ? error.message : String(error)}`
+        `Merge failed for ${selectedNames.join(", ")}: ${error instanceof Error ? error.message : String(error)}`
       );
       setResultIsError(true);
     }
@@ -205,7 +207,9 @@ function App() {
           <select
             style={{ flexGrow: 1 }}
             options={menuOptions}
-            onSelect={(_, option) => handleMenuSelect(option?.value)}
+            onSelect={(_, option) => {
+              if (option) handleMenuSelect(String(option.value));
+            }}
             focused
           />
         </box>
@@ -220,7 +224,9 @@ function App() {
         title="Select a PDF to split"
         currentDirectory={currentDirectory}
         onDirectoryChange={setCurrentDirectory}
-        onFileSelect={handleSplitFileSelect}
+        onFileSelect={(path) => {
+          void handleSplitFileSelect(path);
+        }}
         onBack={handleReturnToMenu}
       />
     );
@@ -237,7 +243,9 @@ function App() {
         pageCount={splitPageCount}
         selectedPages={splitSelectedPages}
         onToggle={handlePageToggle}
-        onConfirm={handleSplitConfirm}
+        onConfirm={(pages) => {
+          void handleSplitConfirm(pages);
+        }}
         onBack={() => setScreen("split_file_select")}
       />
     );
@@ -265,14 +273,24 @@ function App() {
         currentDirectory={currentDirectory}
         onDirectoryChange={setCurrentDirectory}
         onFileSelect={() => {}}
-        onFilesConfirm={handleMergeConfirm}
+        onFilesConfirm={(paths) => {
+          void handleMergeConfirm(paths);
+        }}
         onBack={handleReturnToMenu}
       />
     );
   }
 
   if (screen === "merge_processing") {
-    return <Processing message="Merging PDFs..." />;
+    const selectedNames = mergeSelectedFiles.map((filePath) =>
+      basename(filePath)
+    );
+    const mergeMessage =
+      selectedNames.length > 0
+        ? `Merging PDFs: ${selectedNames.join(", ")}`
+        : "Merging PDFs...";
+
+    return <Processing message={mergeMessage} />;
   }
 
   if (screen === "merge_result") {

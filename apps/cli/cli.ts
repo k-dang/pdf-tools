@@ -34,7 +34,7 @@ for (const [key, value] of Object.entries(cli.flags)) {
     const flagName = key.length === 1 ? `-${key}` : `--${key}`;
     if (typeof value === "boolean") {
       subCommandArgs.push(flagName);
-    } else {
+    } else if (typeof value === "string" || typeof value === "number") {
       subCommandArgs.push(flagName, String(value));
     }
   }
